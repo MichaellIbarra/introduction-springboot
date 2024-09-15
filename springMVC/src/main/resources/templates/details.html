@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+<h1 th:text="${title}"></h1>
+<p>El usuario llamado en Model</p>
+<ul>
+    <li th:text="${name}"> </li>
+    <li th:text="${lastname}"> </li>
+</ul>
+<p>El usuario llamado en Clase</p>
+<ul>
+    <li th:text="${user.name}"></li>
+    <li th:text="${user.lastname}"></li>
+    <li th:text="${user.age}"></li>
+</ul>
+</body>
+</html>
