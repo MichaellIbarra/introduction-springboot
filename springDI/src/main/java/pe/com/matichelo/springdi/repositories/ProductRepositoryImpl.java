@@ -1,12 +1,27 @@
 package pe.com.matichelo.springdi.repositories;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 import pe.com.matichelo.springdi.models.Product;
 
 import java.util.Arrays;
 import java.util.List;
+// Diferencias entre @Component y @Repository, es que @Repository trae funcionalidades adicionales para trabajar con bases de datos y excepciones.
+// @Component: es un estereotipo genérico para cualquier componente de Spring.
+// @Repository: para persistencia, componentes que acceden a los datos (DAO) data access object.
+
+// @Primary: es una anotación que se utiliza para indicar que un bean es el principal cuando hay varios beans del mismo tipo.
+@Primary
+// También se le puede poner el nombre del bean, si no se pone el nombre del bean, se toma el nombre de la clase con la primera letra en minúscula.
+//@Repository("productRepositoryImpl")
+// @RequestScope: se utiliza para indicar que un bean es de alcance de solicitud, por defecto RequestScope es un alcance de solicitud en Spring por lo que se crea un nuevo bean para cada solicitud.
+//@RequestScope
+// SessionScope: se utiliza para indicar que un bean es de alcance de sesión, por defecto SessionScope es un alcance de sesión en Spring por lo que se crea un nuevo bean para cada sesión.
+//@SessionScope
 @Repository
 public class ProductRepositoryImpl implements IProductRepository {
 

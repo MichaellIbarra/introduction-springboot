@@ -1,6 +1,7 @@
 package pe.com.matichelo.springdi.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ProductController {
 
     // Por defecto, los controladores son Singleton, es decir, solo se crea una instancia de la clase.
+//    @Qualifier("productServiceImpl")
     @Autowired
     private IProductService productService;
 

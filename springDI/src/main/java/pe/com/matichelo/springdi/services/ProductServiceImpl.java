@@ -1,6 +1,8 @@
 package pe.com.matichelo.springdi.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import pe.com.matichelo.springdi.models.Product;
 import pe.com.matichelo.springdi.repositories.IProductRepository;
@@ -11,8 +13,26 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements IProductService {
 
-    @Autowired
     private IProductRepository productRepository;
+
+    // Value solo funciona si son parte del contexto de Spring, es decir, si son beans.
+    @Value("${valor.impuesto}")
+    private Double impuesto;
+
+    // Otra forma de inyectar es por el método de setter.
+//    @Autowired
+//    public void setProductRepository(IProductRepository productRepository) {
+//        this.productRepository = productRepository;
+//    }
+
+    // Otra forma de inyectar es por el constructor.
+    // @Qualifier: es una anotación que se utiliza para seleccionar un bean específico cuando hay veinte beans del mismo tipo.
+//    public ProductServiceImpl(@Qualifier("productRepositoryJson") IProductRepository iProductRepository){
+//        this.productRepository = iProductRepository;
+//    }
+    public ProductServiceImpl(@Qualifier("productJson") IProductRepository iProductRepository){
+        this.productRepository = iProductRepository;
+    }
 
     public List<Product> findAll(){
         // stream(): es un método de la clase List que permite trabajar con los elementos de la lista de forma funcional.
@@ -22,8 +42,10 @@ public class ProductServiceImpl implements IProductService {
         //  de Stream en una lista.
         return productRepository.findAll().stream().map(
                 p-> {
-                    Product newProduct = new Product(p.getId(), p.getName(), p.getPrice() * 1.25d);
+                    Product newProduct = new Product(p.getId(), p.getName(), p.getPrice() * impuesto);
                     return newProduct;
+//                    p.setPrice(p.getPrice() * 1.25d);
+//                    return p;
                 }
         ).collect(Collectors.toList());
     }
