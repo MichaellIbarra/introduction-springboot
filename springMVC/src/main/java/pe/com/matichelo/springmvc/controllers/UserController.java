@@ -29,7 +29,7 @@ Finalmente la vista es mostrada al cliente usando los datos del modelo.
      */
     @GetMapping("/details")
     public String details(Model model){
-        var user = new User("Michaell Estiven", "Ibarra Martinez",18);
+        var user = new User("Michaell Estiven", "Ibarra Martinez",19);
         // El objeto Model es un contenedor que contiene los datos del modelo. Se utiliza para pasar datos entre un controlador y una vista.
         model.addAttribute("title", "User Details");
         model.addAttribute("name", "Michaell Estiven");
